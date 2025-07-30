@@ -1,7 +1,14 @@
+using CharacterForgeApi.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddControllers();
+
+builder.Services.AddDbContext<CharacterDbContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 
 // Swagger configuration
 builder.Services.AddEndpointsApiExplorer();    // nécessaire pour la doc minimal API

@@ -1,5 +1,7 @@
 ﻿using CharacterForgeApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using CharacterForgeApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharacterForgeApi.Controllers
 {
@@ -7,56 +9,42 @@ namespace CharacterForgeApi.Controllers
 	[Route("api/[controller]")]
 	public class CharactersController : ControllerBase
 	{
-		private static readonly List<Character> characters = new()
-	{
-		new Character
+		private readonly CharacterDbContext _context;
+
+		public CharactersController(CharacterDbContext context)
 		{
-			Id = 1,
-			Name = "Arthas",
-			Race = "Humain",
-			Class = "Paladin",
-			Strength = 18,
-			Dexterity = 12,
-			Constitution = 16,
-			Intelligence = 14,
-			Wisdom = 10,
-			Charisma = 15
-		},
-		new Character
-		{
-			Id = 2,
-			Name = "Zarok",
-			Race = "Elfe",
-			Class = "Wizard",
-			Strength = 8,
-			Dexterity = 14,
-			Constitution = 10,
-			Intelligence = 20,
-			Wisdom = 16,
-			Charisma = 12
+			_context = context;
 		}
-	};
 
 		[HttpGet]
-		public ActionResult<IEnumerable<Character>> GetAll()
+		public async Task<ActionResult<IEnumerable<Character>>> GetAll()
 		{
-			return Ok(characters);
+			return await _context.Characters.ToListAsync();
 		}
 
-		[HttpGet("searchByClass")]
-		public ActionResult<IEnumerable<Character>> SearchByClass([FromQuery] string characterClass)
+			//[HttpGet("searchByClass")]
+			//public ActionResult<IEnumerable<Character>> SearchByClass([FromQuery] string characterClass)
+			//{
+			//	if (string.IsNullOrEmpty(characterClass))
+			//		return BadRequest("Class name cannot be empty.");
+
+			//	var result = characters
+			//		.Where(c => c.Class.Contains(characterClass, StringComparison.OrdinalIgnoreCase))
+			//		.ToList();
+
+			//	return Ok(result);
+			//}
+
+		[HttpPost]
+		public async Task<ActionResult<Character>> Create(Character character)
 		{
-			if (string.IsNullOrEmpty(characterClass))
-				return BadRequest("Class name cannot be empty.");
+			_context.Characters.Add(character);
+			await _context.SaveChangesAsync();
 
-			var result = characters
-				.Where(c => c.Class.Contains(characterClass, StringComparison.OrdinalIgnoreCase))
-				.ToList();
-
-			return Ok(result);
+			return CreatedAtAction(nameof(GetAll), new { id = character.Id }, character);
 		}
 
-	
 
-	}
+
+		}
 }
