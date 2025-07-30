@@ -28,9 +28,13 @@ export class CharacterService {
     return this.http.get<Character[]>(this.apiUrl);
   }
 
-searchCharactersByClass(characterClass: string): Observable<Character[]> {
-  return this.http.get<Character[]>(`${this.apiUrl}/characters/searchByClass`, {
-    params: { characterClass }
-  });
-}
+  createCharacter(character: Character): Observable<Character> {
+    return this.http.post<Character>(this.apiUrl, character);
+  }
+
+// searchCharactersByClass(characterClass: string): Observable<Character[]> {
+//   return this.http.get<Character[]>(`${this.apiUrl}/characters/searchByClass`, {
+//     params: { characterClass }
+//   });
+// }
 }

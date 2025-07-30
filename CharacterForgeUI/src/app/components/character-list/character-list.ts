@@ -12,8 +12,25 @@ import { CharacterService, Character } from '../../services/character';
 })
 export class CharacterListComponent implements OnInit {
   characters: Character[] = [];
+  
+  // Champs de recherche
   searchTermName: string = '';
   searchTermClass: string = '';
+
+  // Character creation
+  newCharacter: Character = {
+    id: 0,
+    name: '',
+    race: '',
+    class: '',
+    strength: 10,
+    dexterity: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
+    constitution: 10
+  
+  }
 
   constructor(private characterService: CharacterService) {}
 
@@ -68,5 +85,32 @@ export class CharacterListComponent implements OnInit {
         console.error('Erreur lors de la recherche par classe:', error);
       }
     });
+  }
+
+  onCreateCharacter(): void {
+    this.characterService.createCharacter(this.newCharacter).subscribe({
+      next: (created) => {
+        this.characters.push(created);
+        this.resetForm();
+      },
+      error: (error) => {
+        console.error('Erreur lors de la création du personnage:', error);
+      }
+    });
+  }
+
+   resetForm(): void {
+    this.newCharacter = {
+      id: 0,
+      name: '',
+      race: '',
+      class: '',
+      strength: 10,
+      dexterity: 10,
+      constitution: 10,
+      intelligence: 10,
+      wisdom: 10,
+      charisma: 10
+    };
   }
 }

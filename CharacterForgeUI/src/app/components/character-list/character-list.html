@@ -1,7 +1,19 @@
 <h3>Liste des personnages</h3>
 
-<div class="mb-3">
-  <label for="search" class="form-label">Seach by Class</label>
+<h2>Create a character</h2>
+<form (ngSubmit)="onCreateCharacter()" #characterForm="ngForm">
+  <input type="text" name="name" [(ngModel)]="newCharacter.name" placeholder="Nom" required>
+  <input type="text" name="race" [(ngModel)]="newCharacter.race" placeholder="Race" required>
+  <input type="text" name="class" [(ngModel)]="newCharacter.class" placeholder="Classe" required>
+  <input type="number" name="strength" [(ngModel)]="newCharacter.strength" placeholder="Force" required>
+  <input type="number" name="dexterity" [(ngModel)]="newCharacter.dexterity" placeholder="Dextérité" required>
+  <input type="number" name="constitution" [(ngModel)]="newCharacter.constitution" placeholder="Constitution" required>
+  <input type="number" name="intelligence" [(ngModel)]="newCharacter.intelligence" placeholder="Intelligence" required>
+  <input type="number" name="wisdom" [(ngModel)]="newCharacter.wisdom" placeholder="Sagesse" required>
+  <input type="number" name="charisma" [(ngModel)]="newCharacter.charisma" placeholder="Charisme" required>
+  <button type="submit">Create</button>
+</form>
+
 
 <input 
     type="text"
@@ -17,7 +29,6 @@
     class="form-control"
     placeholder="Search by class (ex: Wizard, Paladin)" />
     
-</div>
 
 <div *ngIf="characters.length === 0">
   <p>Aucun personnage trouvé.</p>
