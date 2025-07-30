@@ -1,0 +1,71 @@
+# ========== BACKEND (.NET) ==========
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bin/
+obj/
+
+## User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+.vscode/
+
+## Auto-generated files
+Generated_Code/
+
+## ASP.NET Core secrets
+**/appsettings.*.json
+!**/appsettings.Development.json
+
+# JetBrains Rider
+.idea/
+
+# Visual Studio temp
+.vs/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# ========== FRONTEND (Angular) ==========
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# node dependencies
+/node_modules
+
+# IDEs
+.vscode/
+*.log
+
+# Angular CLI
+.angular
+.angular/cache
+
+# Environment
+src/environments/environment.prod.ts
+src/environments/environment.ts
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# npm debug
+npm-debug.log*
+
+# ========== GLOBAL ==========
+# Logs
+*.log
+logs/
+*.pid
+*.seed
+
+# Package lock files (optional, GitHub might recommend keeping them)
+package-lock.json

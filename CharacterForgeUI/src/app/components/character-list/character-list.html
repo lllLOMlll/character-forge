@@ -1,0 +1,38 @@
+<h3>Liste des personnages</h3>
+
+<div class="mb-3">
+  <label for="search" class="form-label">Seach by Class</label>
+
+<input 
+    type="text"
+    [(ngModel)]="searchTermName"
+    (input)="searchByName()"
+    class="form-control"
+    placeholder="Search by name (ex: John, Alice)"  />
+
+  <input
+    type="text"
+    [(ngModel)]="searchTermClass"
+    (input)="searchByClass()"
+    class="form-control"
+    placeholder="Search by class (ex: Wizard, Paladin)" />
+    
+</div>
+
+<div *ngIf="characters.length === 0">
+  <p>Aucun personnage trouvé.</p>
+</div>
+
+<div *ngFor="let c of characters" class="card mb-2">
+  <div class="card-body">
+    <h5 class="card-title mb-2">{{ c.name }} ({{ c.race }} {{ c.class }})</h5>
+    <p class="card-text">
+      STR: {{ c.strength }} |
+      DEX: {{ c.dexterity }} |
+      INT: {{ c.intelligence }} |
+      CON: {{ c.constitution }} |
+      WIS: {{ c.wisdom }} |
+      CHA: {{ c.charisma }}
+    </p>
+  </div>
+</div>
