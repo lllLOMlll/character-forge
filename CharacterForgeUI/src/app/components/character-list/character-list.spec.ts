@@ -20,3 +20,5 @@ export class CharacterList implements OnInit {
     });
   }
 }
+
+// Comment
