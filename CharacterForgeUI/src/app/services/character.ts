@@ -32,6 +32,10 @@ export class CharacterService {
     return this.http.post<Character>(this.apiUrl, character);
   }
 
+  updateCharacter(id: number, character: Partial<Character>): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, character);
+  }
+
 // searchCharactersByClass(characterClass: string): Observable<Character[]> {
 //   return this.http.get<Character[]>(`${this.apiUrl}/characters/searchByClass`, {
 //     params: { characterClass }

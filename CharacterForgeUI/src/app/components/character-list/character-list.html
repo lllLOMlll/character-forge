@@ -1,49 +1,114 @@
-<h3>Liste des personnages</h3>
+<div class="container my-5">
+  <br />
+  <h2>Create a character</h2>
 
-<h2>Create a character</h2>
-<form (ngSubmit)="onCreateCharacter()" #characterForm="ngForm">
-  <input type="text" name="name" [(ngModel)]="newCharacter.name" placeholder="Nom" required>
-  <input type="text" name="race" [(ngModel)]="newCharacter.race" placeholder="Race" required>
-  <input type="text" name="class" [(ngModel)]="newCharacter.class" placeholder="Classe" required>
-  <input type="number" name="strength" [(ngModel)]="newCharacter.strength" placeholder="Force" required>
-  <input type="number" name="dexterity" [(ngModel)]="newCharacter.dexterity" placeholder="Dextérité" required>
-  <input type="number" name="constitution" [(ngModel)]="newCharacter.constitution" placeholder="Constitution" required>
-  <input type="number" name="intelligence" [(ngModel)]="newCharacter.intelligence" placeholder="Intelligence" required>
-  <input type="number" name="wisdom" [(ngModel)]="newCharacter.wisdom" placeholder="Sagesse" required>
-  <input type="number" name="charisma" [(ngModel)]="newCharacter.charisma" placeholder="Charisme" required>
-  <button type="submit">Create</button>
-</form>
+  <div *ngIf="createCharacterMessage" class="alert alert-success" role="alert">
+    {{ createCharacterMessage }}
+  </div>
+  <form (ngSubmit)="onCreateCharacter()" #characterForm="ngForm">
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="newCharacter.name"
+      placeholder="Nom"
+      required
+    />
+    <input
+      type="text"
+      name="race"
+      [(ngModel)]="newCharacter.race"
+      placeholder="Race"
+      required
+    />
+    <input
+      type="text"
+      name="class"
+      [(ngModel)]="newCharacter.class"
+      placeholder="Classe"
+      required
+    />
+    <input
+      type="number"
+      name="strength"
+      [(ngModel)]="newCharacter.strength"
+      placeholder="Strength"
+      required
+    />
+    <input
+      type="number"
+      name="dexterity"
+      [(ngModel)]="newCharacter.dexterity"
+      placeholder="Dexterity"
+      required
+    />
+    <input
+      type="number"
+      name="constitution"
+      [(ngModel)]="newCharacter.constitution"
+      placeholder="Constitution"
+      required
+    />
+    <input
+      type="number"
+      name="intelligence"
+      [(ngModel)]="newCharacter.intelligence"
+      placeholder="Intelligence"
+      required
+    />
+    <input
+      type="number"
+      name="wisdom"
+      [(ngModel)]="newCharacter.wisdom"
+      placeholder="Wisdom"
+      required
+    />
+    <input
+      type="number"
+      name="charisma"
+      [(ngModel)]="newCharacter.charisma"
+      placeholder="Charisma"
+      required
+    />
+    <br /><br />
+    <button class="btn btn-primary" type="submit">Create Character</button>
+  </form>
 
-
-<input 
+  <br /><br />
+  <h2>Seach a character</h2>
+  <input
     type="text"
     [(ngModel)]="searchTermName"
     (input)="searchByName()"
     class="form-control"
-    placeholder="Search by name (ex: John, Alice)"  />
+    placeholder="Search by name (ex: John, Alice)"
+  />
 
   <input
     type="text"
     [(ngModel)]="searchTermClass"
     (input)="searchByClass()"
     class="form-control"
-    placeholder="Search by class (ex: Wizard, Paladin)" />
-    
+    placeholder="Search by class (ex: Wizard, Paladin)"
+  />
 
-<div *ngIf="characters.length === 0">
-  <p>Aucun personnage trouvé.</p>
-</div>
+  <div *ngIf="characters.length === 0">
+    <p>Aucun personnage trouvé.</p>
+  </div>
 
-<div *ngFor="let c of characters" class="card mb-2">
-  <div class="card-body">
-    <h5 class="card-title mb-2">{{ c.name }} ({{ c.race }} {{ c.class }})</h5>
-    <p class="card-text">
-      STR: {{ c.strength }} |
-      DEX: {{ c.dexterity }} |
-      INT: {{ c.intelligence }} |
-      CON: {{ c.constitution }} |
-      WIS: {{ c.wisdom }} |
-      CHA: {{ c.charisma }}
-    </p>
+  <br /><br />
+  <h2>Characters list</h2>
+  <div *ngFor="let c of characters" class="card mb-2">
+    <div class="card-body">
+      <h5 class="card-title mb-2">{{ c.name }} ({{ c.race }} {{ c.class }})</h5>
+      <p class="card-text">
+        STR: {{ c.strength }} | DEX: {{ c.dexterity }} | INT:
+        {{ c.intelligence }} | CON: {{ c.constitution }} | WIS: {{ c.wisdom }} |
+        CHA: {{ c.charisma }}
+      </p>
+      <button (click)="editCharacter(c)" class="btn btn-sm btn-primary">
+        Edit
+      </button>
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </div>
   </div>
 </div>

@@ -16,6 +16,7 @@ export class CharacterListComponent implements OnInit {
   // Champs de recherche
   searchTermName: string = '';
   searchTermClass: string = '';
+  createCharacterMessage:string = '';
 
   // Character creation
   newCharacter: Character = {
@@ -90,8 +91,13 @@ export class CharacterListComponent implements OnInit {
   onCreateCharacter(): void {
     this.characterService.createCharacter(this.newCharacter).subscribe({
       next: (created) => {
+        this.createCharacterMessage = '✅ Character created successfully!';
         this.characters.push(created);
         this.resetForm();
+
+        setTimeout(() => {
+          this.createCharacterMessage = '';
+        }, 5000); 
       },
       error: (error) => {
         console.error('Erreur lors de la création du personnage:', error);
@@ -113,4 +119,20 @@ export class CharacterListComponent implements OnInit {
       charisma: 10
     };
   }
+
+    editCharacter(c: Character) {
+    const updatedCharacter: Partial<Character> = {
+      name: prompt("New name", c.name) || c.name,
+      race: prompt("New race", c.race) || c.race,
+      class: prompt("New class", c.class) || c.class,
+      strength: Number(prompt("Strength", c.strength.toString())),
+      dexterity: Number(prompt("Dexterity", c.dexterity.toString())),
+      intelligence: Number(prompt("Intelligence", c.intelligence.toString()))
+    };
+
+    this.characterService.updateCharacter(c.id, updatedCharacter).subscribe(() => {
+      this.loadAllCharacters(); // recharge la liste
+    });
+  }
+
 }
