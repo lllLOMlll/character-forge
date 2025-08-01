@@ -96,6 +96,9 @@
   </div>
 
   <br /><br />
+  <div *ngIf="deleteCharacterMessage" class="alert alert-danger" role="alert">
+    {{ deleteCharacterMessage }}
+  </div>
   <h2>Characters list</h2>
   <div *ngFor="let c of characters" class="card mb-2">
     <div class="card-body">
@@ -105,10 +108,14 @@
         {{ c.intelligence }} | CON: {{ c.constitution }} | WIS: {{ c.wisdom }} |
         CHA: {{ c.charisma }}
       </p>
-      <button (click)="editCharacter(c)" class="btn btn-sm btn-primary">
-        Edit
-      </button>
-      <button class="btn btn-sm btn-danger">Delete</button>
+      <div class="d-flex gap-2">
+        <button (click)="editCharacter(c)" class="btn btn-sm btn-primary">
+          Edit
+        </button>
+        <button (click)="deleteCharacter(c)" class="btn btn-sm btn-danger">
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </div>

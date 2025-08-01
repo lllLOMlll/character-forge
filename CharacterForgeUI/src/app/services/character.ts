@@ -36,6 +36,11 @@ export class CharacterService {
     return this.http.put<void>(`${this.apiUrl}/${id}`, character);
   }
 
+  deleteCharacter(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+
 // searchCharactersByClass(characterClass: string): Observable<Character[]> {
 //   return this.http.get<Character[]>(`${this.apiUrl}/characters/searchByClass`, {
 //     params: { characterClass }
