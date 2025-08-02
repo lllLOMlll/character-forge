@@ -40,21 +40,37 @@ namespace CharacterForgeApi.Controllers
 			return Ok(dtos);
 		}
 
-		//[HttpGet("searchByClass")]
-		//public ActionResult<IEnumerable<Character>> SearchByClass([FromQuery] string characterClass)
-		//{
-		//	if (string.IsNullOrEmpty(characterClass))
-		//		return BadRequest("Class name cannot be empty.");
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Character>> GetCharacterById(int id) // JAMAIS de [FromBody] pour un Get
+		{
+			var character = await _context.Characters.FindAsync(id);
 
-		//	var result = characters
-		//		.Where(c => c.Class.Contains(characterClass, StringComparison.OrdinalIgnoreCase))
-		//		.ToList();
+			if (character == null)
+			{
+				return NotFound();
+			}
 
-		//	return Ok(result);
-		//}
+			var dto = new CharacterDto
+			{
+				Id = character.Id,
+				Name = character.Name,
+				Race = character.Race,
+				Class = character.Class,
+				Strength = character.Strength,
+				Dexterity = character.Dexterity,
+				Constitution = character.Constitution,
+				Intelligence = character.Intelligence,
+				Wisdom = character.Wisdom,
+				Charisma = character.Charisma
+
+			};
+
+			return Ok(dto);
+		}
+
 
 		[HttpPost]
-		public async Task<ActionResult<Character>> Create([FromBody] CreateCharacterDto dto)
+		public async Task<ActionResult<Character>> Create([FromBody] Character dto)
 		{
 			if (dto == null)
 			{
