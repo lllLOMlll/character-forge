@@ -40,18 +40,18 @@ namespace CharacterForgeApi.Controllers
 			return Ok(dtos);
 		}
 
-			//[HttpGet("searchByClass")]
-			//public ActionResult<IEnumerable<Character>> SearchByClass([FromQuery] string characterClass)
-			//{
-			//	if (string.IsNullOrEmpty(characterClass))
-			//		return BadRequest("Class name cannot be empty.");
+		//[HttpGet("searchByClass")]
+		//public ActionResult<IEnumerable<Character>> SearchByClass([FromQuery] string characterClass)
+		//{
+		//	if (string.IsNullOrEmpty(characterClass))
+		//		return BadRequest("Class name cannot be empty.");
 
-			//	var result = characters
-			//		.Where(c => c.Class.Contains(characterClass, StringComparison.OrdinalIgnoreCase))
-			//		.ToList();
+		//	var result = characters
+		//		.Where(c => c.Class.Contains(characterClass, StringComparison.OrdinalIgnoreCase))
+		//		.ToList();
 
-			//	return Ok(result);
-			//}
+		//	return Ok(result);
+		//}
 
 		[HttpPost]
 		public async Task<ActionResult<Character>> Create([FromBody] CreateCharacterDto dto)
@@ -64,7 +64,7 @@ namespace CharacterForgeApi.Controllers
 			var character = new Character
 			{
 				Name = dto.Name,
-				Race= dto.Race,
+				Race = dto.Race,
 				Class = dto.Class,
 				Strength = dto.Strength,
 				Dexterity = dto.Dexterity,
@@ -118,6 +118,20 @@ namespace CharacterForgeApi.Controllers
 			await _context.SaveChangesAsync();
 			return NoContent();
 
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteCharacter(int id)
+		{
+			var character = await _context.Characters.FindAsync(id);
+			if (character == null)
+			{
+				return NotFound();
+			}
+
+			_context.Characters.Remove(character);
+			await _context.SaveChangesAsync();
+			return NoContent();
 		}
 
 
