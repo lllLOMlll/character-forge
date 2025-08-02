@@ -50,9 +50,9 @@
         CHA: {{ c.charisma }}
       </p>
       <div class="d-flex gap-2">
-        <button (click)="editCharacter(c)" class="btn btn-sm btn-primary">
-          Edit
-        </button>
+        <a [routerLink]="['/edit-character', c.id]" class="btn btn-sm btn-primary">
+          Edit 
+        </a>
         <button (click)="deleteCharacter(c)" class="btn btn-sm btn-danger">
           Delete
         </button>

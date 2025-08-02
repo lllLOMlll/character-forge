@@ -1,0 +1,89 @@
+<div class="container my-4">
+  <h2>Update Character</h2>
+  <form (ngSubmit)="onUpdateCharacter()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        [(ngModel)]="character.name"
+        name="name"
+        class="form-control"
+        id="name"
+        required
+      />
+      <label for="race">Race</label>
+      <input
+        [(ngModel)]="character.race"
+        name="race"
+        class="form-control"
+        id="race"
+        required
+      />
+      <label for="class">Class</label>
+      <input
+        [(ngModel)]="character.class"
+        name="class"
+        class="form-control"
+        id="class"
+        required
+      />
+      <label for="strength">Strength</label>
+      <input
+        type="number"
+        [(ngModel)]="character.strength"
+        name="strength"
+        class="form-control"
+        id="strength"
+        required
+      />
+      <label for="dexterity">Dexterity</label>
+      <input
+        type="number"
+        [(ngModel)]="character.dexterity"
+        name="dexterity"
+        class="form-control"
+        id="dexterity"
+        required
+      />
+      <label for="constitution">Constitution</label>
+      <input
+        type="number"
+        [(ngModel)]="character.constitution"
+        name="constitution"
+        class="form-control"
+        id="constitution"
+        required
+      />
+      <label for="intelligence">Intelligence</label>
+      <input
+        type="number"
+        [(ngModel)]="character.intelligence"
+        name="intelligence"
+        class="form-control"
+        id="intelligence"
+        required
+      />
+      <label for="wisdom">Wisdom</label>
+      <input
+        type="number"
+        [(ngModel)]="character.wisdom"
+        name="wisdom"
+        class="form-control"
+        id="wisdom"
+        required
+      />
+      <label for="charisma">Charisma</label>
+      <input
+        type="number"
+        [(ngModel)]="character.charisma"
+        name="charisma"
+        class="form-control"
+        id="charisma"
+        required
+      />
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button (click)="cancel()" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>

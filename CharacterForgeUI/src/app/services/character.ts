@@ -28,6 +28,10 @@ export class CharacterService {
     return this.http.get<Character[]>(this.apiUrl);
   }
 
+  getCharacterById(id: number): Observable<Character> {
+    return this.http.get<Character>(`${this.apiUrl}/${id}`);
+  }
+
   createCharacter(character: Character): Observable<Character> {
     return this.http.post<Character>(this.apiUrl, character);
   }
@@ -40,10 +44,4 @@ export class CharacterService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-
-// searchCharactersByClass(characterClass: string): Observable<Character[]> {
-//   return this.http.get<Character[]>(`${this.apiUrl}/characters/searchByClass`, {
-//     params: { characterClass }
-//   });
-// }
 }
