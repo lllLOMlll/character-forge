@@ -1,79 +1,17 @@
-<div class="container my-5">
-  <br />
-  <h2>Create a character</h2>
-
-  <div *ngIf="createCharacterMessage" class="alert alert-success" role="alert">
-    {{ createCharacterMessage }}
+<div class="container my-4">
+  
+  <div class="container text-center">
+    <div *ngIf="successMessage" class="alert alert-success" role="alert">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
+  <a [routerLink]="['/create-character']" class="btn btn-success mb-3">
+    Create New Character
+  </a>
   </div>
-  <form (ngSubmit)="onCreateCharacter()" #characterForm="ngForm">
-    <input
-      type="text"
-      name="name"
-      [(ngModel)]="newCharacter.name"
-      placeholder="Nom"
-      required
-    />
-    <input
-      type="text"
-      name="race"
-      [(ngModel)]="newCharacter.race"
-      placeholder="Race"
-      required
-    />
-    <input
-      type="text"
-      name="class"
-      [(ngModel)]="newCharacter.class"
-      placeholder="Classe"
-      required
-    />
-    <input
-      type="number"
-      name="strength"
-      [(ngModel)]="newCharacter.strength"
-      placeholder="Strength"
-      required
-    />
-    <input
-      type="number"
-      name="dexterity"
-      [(ngModel)]="newCharacter.dexterity"
-      placeholder="Dexterity"
-      required
-    />
-    <input
-      type="number"
-      name="constitution"
-      [(ngModel)]="newCharacter.constitution"
-      placeholder="Constitution"
-      required
-    />
-    <input
-      type="number"
-      name="intelligence"
-      [(ngModel)]="newCharacter.intelligence"
-      placeholder="Intelligence"
-      required
-    />
-    <input
-      type="number"
-      name="wisdom"
-      [(ngModel)]="newCharacter.wisdom"
-      placeholder="Wisdom"
-      required
-    />
-    <input
-      type="number"
-      name="charisma"
-      [(ngModel)]="newCharacter.charisma"
-      placeholder="Charisma"
-      required
-    />
-    <br /><br />
-    <button class="btn btn-primary" type="submit">Create Character</button>
-  </form>
 
-  <br /><br />
   <h2>Seach a character</h2>
   <input
     type="text"
@@ -96,8 +34,11 @@
   </div>
 
   <br /><br />
-  <div *ngIf="deleteCharacterMessage" class="alert alert-danger" role="alert">
-    {{ deleteCharacterMessage }}
+  <div *ngIf="successMessage" class="alert alert-danger" role="alert">
+    {{ successMessage }}
+  </div>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
   </div>
   <h2>Characters list</h2>
   <div *ngFor="let c of characters" class="card mb-2">

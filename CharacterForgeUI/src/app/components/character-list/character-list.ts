@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CharacterService, Character } from '../../services/character';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-list',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Les deux imports nécessaires
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './character-list.html',
   styleUrls: ['./character-list.css'],
 })
@@ -16,8 +17,8 @@ export class CharacterListComponent implements OnInit {
   // Champs de recherche
   searchTermName: string = '';
   searchTermClass: string = '';
-  createCharacterMessage: string = '';
-  deleteCharacterMessage: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
   // Character creation
   newCharacter: Character = {
@@ -33,9 +34,30 @@ export class CharacterListComponent implements OnInit {
     constitution: 10,
   };
 
-  constructor(private characterService: CharacterService) {}
+  constructor(
+    private characterService: CharacterService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    const vav = this.router.getCurrentNavigation();
+    const state = vav?.extras.state as {
+      successMessage: string;
+      errorMessage: string;
+    };
+
+    if (state?.successMessage) {
+      this.successMessage = state.successMessage;
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 5000);
+    }
+
+    if (state?.errorMessage) {
+      this.successMessage = state.errorMessage;
+      setTimeout(() => (this.successMessage = ''), 5000);
+    }
+
     this.loadAllCharacters();
   }
 
@@ -91,12 +113,12 @@ export class CharacterListComponent implements OnInit {
   onCreateCharacter(): void {
     this.characterService.createCharacter(this.newCharacter).subscribe({
       next: (created) => {
-        this.createCharacterMessage = '✅ Character created successfully!';
+        this.successMessage = '✅ Character created successfully!';
         this.characters.push(created);
         this.resetForm();
 
         setTimeout(() => {
-          this.createCharacterMessage = '';
+          this.successMessage = '';
         }, 5000);
       },
       error: (error) => {
@@ -144,21 +166,19 @@ export class CharacterListComponent implements OnInit {
 
     this.characterService.deleteCharacter(c.id).subscribe({
       next: () => {
-        this.deleteCharacterMessage = `🗑️ Character ${c.name} deleted successfully!`;
+        this.successMessage = `🗑️ Character ${c.name} deleted successfully!`;
         this.loadAllCharacters();
         setTimeout(() => {
-          this.deleteCharacterMessage = '';
+          this.successMessage = '';
         }, 5000);
       },
       error: (error) => {
         console.error('Error while deleting the character:', error);
-        this.deleteCharacterMessage = `❌ Error deleting character ${c.name}. Please try again later.`;
+        this.errorMessage = `❌ Error deleting character ${c.name}. Please try again later.`;
         setTimeout(() => {
-          this.deleteCharacterMessage = '';
+          this.errorMessage = '';
         }, 5000);
       },
-    });  
+    });
   }
-
-  
 }
