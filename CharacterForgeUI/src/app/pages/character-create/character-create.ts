@@ -50,5 +50,4 @@ export class CharacterCreate {
   onCancel(): void {
     this.router.navigate(['/characters']);
   }
-  
 }
