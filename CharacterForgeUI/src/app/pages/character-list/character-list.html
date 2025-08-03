@@ -34,12 +34,6 @@
   </div>
 
   <br /><br />
-  <div *ngIf="successMessage" class="alert alert-danger" role="alert">
-    {{ successMessage }}
-  </div>
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-    {{ errorMessage }}
-  </div>
   <h2>Characters list</h2>
   <div *ngFor="let c of characters" class="card mb-2">
     <div class="card-body">

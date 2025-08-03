@@ -38,7 +38,9 @@ export class EditCharacterPage implements OnInit {
 
   onUpdateCharacter() {
     this.characterService.updateCharacter(this.character.id, this.character).subscribe(() => {
-      this.router.navigate(['/characters']);
+      this.router.navigate(['/characters'], {
+        state: { successMessage: `${this.character.name} updated successfully!` },
+      });
     });
   }
 

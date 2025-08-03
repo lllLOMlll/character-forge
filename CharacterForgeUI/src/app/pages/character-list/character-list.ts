@@ -40,10 +40,9 @@ export class CharacterListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const vav = this.router.getCurrentNavigation();
-    const state = vav?.extras.state as {
-      successMessage: string;
-      errorMessage: string;
+    const state = window.history.state as {
+      successMessage?: string;
+      errorMessage?: string;
     };
 
     if (state?.successMessage) {
@@ -54,8 +53,8 @@ export class CharacterListComponent implements OnInit {
     }
 
     if (state?.errorMessage) {
-      this.successMessage = state.errorMessage;
-      setTimeout(() => (this.successMessage = ''), 5000);
+      this.errorMessage = state.errorMessage;
+      setTimeout(() => (this.errorMessage = ''), 5000);
     }
 
     this.loadAllCharacters();
