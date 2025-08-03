@@ -1,6 +1,6 @@
-﻿namespace CharacterForgeApi.Dtos
+﻿namespace CharacterForgeApi.Dtos.CharacterDtos
 {
-	public class UpdateCharacterDto
+	public class CreateCharacterDto
 	{
 		public string Name { get; set; } = "";
 		public string Race { get; set; } = "";

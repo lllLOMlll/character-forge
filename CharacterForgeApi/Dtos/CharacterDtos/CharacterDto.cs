@@ -1,4 +1,4 @@
-﻿namespace CharacterForgeApi.Dtos
+﻿namespace CharacterForgeApi.Dtos.CharacterDtos
 {
 	public class CharacterDto
 	{
