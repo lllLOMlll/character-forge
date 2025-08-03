@@ -158,7 +158,7 @@ export class CharacterListComponent implements OnInit {
       });
   }
 
-  deleteCharacter(c: Character): void {
+  onDeleteCharacter(c: Character): void {
     if (!confirm(`Are you sure you want to delete ${c.name}?`)) {
       return;
     }
@@ -167,6 +167,7 @@ export class CharacterListComponent implements OnInit {
       next: () => {
         this.successMessage = `🗑️ Character ${c.name} deleted successfully!`;
         this.loadAllCharacters();
+        this.scrollToTop();
         setTimeout(() => {
           this.successMessage = '';
         }, 5000);
@@ -174,10 +175,18 @@ export class CharacterListComponent implements OnInit {
       error: (error) => {
         console.error('Error while deleting the character:', error);
         this.errorMessage = `❌ Error deleting character ${c.name}. Please try again later.`;
+        this.loadAllCharacters();
+        this.scrollToTop();
         setTimeout(() => {
           this.errorMessage = '';
         }, 5000);
       },
     });
   }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+
 }
