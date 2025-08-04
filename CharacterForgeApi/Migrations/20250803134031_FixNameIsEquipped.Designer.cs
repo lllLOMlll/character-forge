@@ -3,6 +3,7 @@ using CharacterForgeApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CharacterForgeApi.Migrations
 {
     [DbContext(typeof(CharacterDbContext))]
-    partial class CharacterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250803134031_FixNameIsEquipped")]
+    partial class FixNameIsEquipped
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,7 +141,7 @@ namespace CharacterForgeApi.Migrations
                     b.Property<int>("Damage")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DamageType")
+                    b.Property<int?>("DamageTye")
                         .HasColumnType("int");
 
                     b.Property<int>("Range")

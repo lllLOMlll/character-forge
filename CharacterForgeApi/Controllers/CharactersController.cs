@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CharacterForgeApi.Data;
 using Microsoft.EntityFrameworkCore;
-using CharacterForgeApi.Dtos;
+using CharacterForgeApi.Dtos.CharacterDtos;
 
 namespace CharacterForgeApi.Controllers
 {

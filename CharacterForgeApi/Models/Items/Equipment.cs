@@ -2,7 +2,7 @@
 {
 	public abstract class Equipment : Item
 	{
-		public bool isEquipped { get; set; }
+		public bool IsEquipped { get; set; }
 		public int Weight { get; set; }
 	}
 }
